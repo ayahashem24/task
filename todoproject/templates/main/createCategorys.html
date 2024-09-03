@@ -1,0 +1,31 @@
+{% extends "main/components/base.html" %} 
+
+{% block title %}
+    create  new Category
+
+{% endblock %}
+
+
+{% block content %}
+<div class=" container  m-auto">
+
+    <h3>  new Category</h3>
+   
+    <form method="POST">
+    {% csrf_token %}  
+    
+    {{ form }}
+
+    <div class=" justify-content-around mt-1 align-items-center">
+        <input type="submit" class="btn btn-primary" value="Create category">
+        <a href="{% url 'home' %}" class="btn btn-dark">  Go Back</a>
+    </div>
+    </form>
+    
+</div>
+
+
+
+
+{% endblock  %}
+

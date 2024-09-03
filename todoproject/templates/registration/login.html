@@ -1,0 +1,18 @@
+{% extends "main/components/base.html" %} 
+
+{% block title %}
+   login
+{% endblock %}
+
+<h3>login</h3>
+{% block content %}
+<form method="POST">
+   {% csrf_token %}  
+     <div class="d-flex justify-content-center align-items-center">
+        {{form.as_p}}
+
+     </div>
+       <input type="submit" class=" btn btn-dark">
+
+</form>
+{%endblock%}

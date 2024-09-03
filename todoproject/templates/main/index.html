@@ -1,0 +1,150 @@
+{% extends "main/components/base.html" %} 
+
+
+{% block title %}
+  welcome Page
+{% endblock  %}
+
+{% block content %}
+<div class="container d-flex justify-content-around align-items-center">
+    <a href="{% url 'createtodo' %}" class="btn btn-primary">Create New Task</a>
+    <a href="{% url 'createcategory' %}" class="btn btn-primary"> Create Category</a>
+<div>
+   
+    <a href="{% url 'register' %}" class="btn btn-primary"> username</a>
+</div>
+
+</div>
+  <ol class="list-group  flex-row justify-content-around align-items-center mt-1 list-group-numbered"> 
+    {% for cat in categories %}
+      <li class="list-group-item  justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">{{ cat.name }}</div>
+  
+          <a href="{% url 'cattodo' cat.id %}" class="btn btn-dark m-1" > View Todo </a>
+  
+         {{ cat.description }}
+        </div>
+        <span class="badge text-body-secondary rounded-pill">cat</span>
+      </li>
+      {% endfor %}
+    
+    </ol>    
+
+
+  <div class="row row-cols-1 p-1 row-cols-md-1 g-1">
+    {% for task in  tasks %}
+      
+      {% if task.status == "PENDING"  %}
+       
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{task.title}}</h5>
+              <p class="card-text">{{task.description}}</p>
+              <a href='{%  url "detail" task.id  %}' class="btn btn-primary" > View Details </a>
+              <a href='{%  url "update-task" task.id  %}' class="btn btn-dark" > Update Task </a>
+
+              <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Delete Task 
+              </button>
+              
+            </div>
+          </div>
+        </div>
+        {% elif task.status == "IN PROGRESS"  %}
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{task.title}}</h5>
+              <p class="card-text">{{task.description}}</p>
+              <a href='{%  url "detail" task.id  %}' class="btn btn-primary" > View Details </a>
+              <a href='{%  url "update-task" task.id  %}' class="btn btn-dark" > Update Task </a>
+              <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Delete Task 
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {% else %}
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{task.title}}</h5>
+              <p class="card-text">{{task.description}}</p>
+              <a href='{%  url "detail" task.id  %}' class="btn btn-primary" > View Details </a>
+              <a href='{%  url "update-task" task.id  %}' class="btn btn-dark" > Update Task </a>
+              <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Delete Task 
+              </button>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+       
+              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete {{task.title}} task</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      by Confirm Deleteing you will peremently delete the {{task.title}}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <a href='{%  url "delete-task" task.id  %}' class="btn btn-primary">Confirm Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+        
+
+
+        {% endfor %}
+        
+      </div>
+      
+
+
+ 
+
+  <div style="max-width: 800px; margin: 0 auto;">
+    <h1>All Categories</h1>
+    <ul>
+        {% for category in categories %}
+            {{ category.name }}
+        {% endfor %}
+    </ul>
+
+    <h2>All Todos</h2>
+    <ul>
+        {% for todo in todos %}
+           {{ todo.name }}
+        {% endfor %}
+    </ul>
+</div>
+ </div>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+{% extends "main/components/base.html" %} 
+
+{% block title %}
+    {% if form.instance.id %} Update Task {% else %} Create Task {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container m-auto">
+    <h3>{% if form.instance.id %} Update Task {% else %} Create New Task {% endif %}</h3>
+
+    <form method="POST">
+        {% csrf_token %}  
+        {{ form }}
+
+        <div class="d-flex justify-content-around mt-3 align-items-center">
+            <input type="submit" class="btn btn-primary" value="{% if form.instance.id %} Save Changes {% else %} Create Task {% endif %}">
+            <a href="{% url 'home' %}" class="btn btn-dark">Go Back</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .container {
+        margin-top: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    h3 {
+        margin-bottom: 20px;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    input[type="submit"] {
+        margin-right: 10px;
+    }
+</style>
+
+<!-- {% endblock %} -->
+
+
+ 
+    
